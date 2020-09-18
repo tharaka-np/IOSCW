@@ -12,9 +12,13 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Sign in"
         // Do any additional setup after loading the view.
     }
-
-
+    
+    @IBAction func didTapButton() {
+        let vc = storyboard?.instantiateViewController(identifier: "signup_vc") as!SignUpViewController
+        present(vc, animated:true)
+    }
 }
 
