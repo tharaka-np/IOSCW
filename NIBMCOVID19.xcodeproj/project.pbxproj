@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F13232E2515B78300965A3A /* ServiceLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13232D2515B78300965A3A /* ServiceLayer.swift */; };
+		3F1323332515B88900965A3A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1323322515B88900965A3A /* Model.swift */; };
+		3F1323362515B95F00965A3A /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1323352515B95F00965A3A /* Users.swift */; };
 		3F40695D250DF6AD000D1BFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F40695C250DF6AD000D1BFD /* AppDelegate.swift */; };
 		3F40695F250DF6AD000D1BFD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F40695E250DF6AD000D1BFD /* SceneDelegate.swift */; };
 		3F406961250DF6AD000D1BFD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F406960250DF6AD000D1BFD /* ViewController.swift */; };
@@ -32,6 +35,9 @@
 /* Begin PBXFileReference section */
 		0072174493CDA922BCF726EE /* Pods_NIBMCOVID19.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NIBMCOVID19.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AE6EB3046DA73CF33136E36 /* Pods-NIBMCOVID19.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NIBMCOVID19.debug.xcconfig"; path = "Target Support Files/Pods-NIBMCOVID19/Pods-NIBMCOVID19.debug.xcconfig"; sourceTree = "<group>"; };
+		3F13232D2515B78300965A3A /* ServiceLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLayer.swift; sourceTree = "<group>"; };
+		3F1323322515B88900965A3A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		3F1323352515B95F00965A3A /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		3F406959250DF6AD000D1BFD /* NIBMCOVID19.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NIBMCOVID19.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F40695C250DF6AD000D1BFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F40695E250DF6AD000D1BFD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +74,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F13232C2515B6D900965A3A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3F13232D2515B78300965A3A /* ServiceLayer.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		3F1323312515B83F00965A3A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3F1323322515B88900965A3A /* Model.swift */,
+				3F1323352515B95F00965A3A /* Users.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		3F406950250DF6AD000D1BFD = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +112,8 @@
 		3F40695B250DF6AD000D1BFD /* NIBMCOVID19 */ = {
 			isa = PBXGroup;
 			children = (
+				3F1323312515B83F00965A3A /* Model */,
+				3F13232C2515B6D900965A3A /* Services */,
 				3F7EA3202514E0480062DF69 /* SurveyControllers */,
 				3F502E53251260B800A879B2 /* Styles */,
 				3F502E522512609B00A879B2 /* Controllers */,
@@ -280,7 +305,10 @@
 				3F7EA3282514E7470062DF69 /* Surv4ViewController.swift in Sources */,
 				3F7EA3222514E0680062DF69 /* Surv1ViewController.swift in Sources */,
 				3F40695F250DF6AD000D1BFD /* SceneDelegate.swift in Sources */,
+				3F1323362515B95F00965A3A /* Users.swift in Sources */,
+				3F1323332515B88900965A3A /* Model.swift in Sources */,
 				3F502E592513787200A879B2 /* UpdatesViewController.swift in Sources */,
+				3F13232E2515B78300965A3A /* ServiceLayer.swift in Sources */,
 				3F7EA3262514E59A0062DF69 /* Surv3ViewController.swift in Sources */,
 				3F7EA32C2515293B0062DF69 /* ImageUploadViewController.swift in Sources */,
 				3F502E5D25139DD100A879B2 /* SettingsViewController.swift in Sources */,

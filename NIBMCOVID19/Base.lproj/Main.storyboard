@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="i3H-DS-Ced">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="y2P-L3-C9i">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -799,6 +799,7 @@
                         <outlet property="tblMenu" destination="IdE-m9-MA9" id="DF4-s0-kM0"/>
                         <segue destination="iuG-MO-62D" kind="show" identifier="signupVC" id="HrJ-ro-7PM"/>
                         <segue destination="6Ul-vr-Keh" kind="show" identifier="aboutusVC" id="LHB-sv-reA"/>
+                        <segue destination="i3H-DS-Ced" kind="show" identifier="userprofileconnect" id="Cqe-sK-V6G"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GVT-XC-Ojd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1469,23 +1470,20 @@
         <!--Image Upload View Controller-->
         <scene sceneID="QDs-oK-XaC">
             <objects>
-                <viewController id="i3H-DS-Ced" customClass="ImageUploadViewController" customModule="NIBMCOVID19" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="i3H-DS-Ced" customClass="ImageUploadViewController" customModule="NIBMCOVID19" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FHb-0s-cym">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3mJ-74-aj2">
-                                <rect key="frame" x="107" y="99" width="200" height="200"/>
+                                <rect key="frame" x="107" y="143" width="200" height="208"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="O2C-dh-WZg"/>
-                                    <constraint firstAttribute="width" constant="200" id="eL1-Gz-h8u"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="ePC-9w-hFy"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="wuF-i8-a1N"/>
-                                    <constraint firstAttribute="height" constant="200" id="xFi-31-qVb"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="300" id="NrZ-nK-Ddd"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="wLp-k9-gnu"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NxO-cn-1db">
-                                <rect key="frame" x="107" y="319" width="200" height="35"/>
+                                <rect key="frame" x="107" y="371" width="200" height="35"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="cW4-bg-Qbe"/>
@@ -1493,32 +1491,48 @@
                                 <state key="normal" title="Upload image">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTapButton" destination="i3H-DS-Ced" eventType="touchUpInside" id="L5b-Uw-p0K"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TPu-as-BRk">
-                                <rect key="frame" x="20" y="430" width="374" height="35"/>
+                                <rect key="frame" x="20" y="482" width="374" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="0f8-ul-OnE"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="1qk-ef-uJv"/>
+                                    <constraint firstAttribute="height" constant="40" id="O41-bO-Nbp"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="xGt-aC-APM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gER-1X-ZdG">
-                                <rect key="frame" x="20" y="490" width="374" height="35"/>
+                                <rect key="frame" x="20" y="547" width="374" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="lwX-nd-PSX"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="4YI-dk-Sbv"/>
+                                    <constraint firstAttribute="height" constant="40" id="8Dc-qH-lbL"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Index no" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xb2-EI-Qxn">
-                                <rect key="frame" x="20" y="550" width="374" height="35"/>
+                                <rect key="frame" x="20" y="612" width="374" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="OZX-2Z-19z"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="ogu-fV-eO4"/>
+                                    <constraint firstAttribute="height" constant="40" id="qQn-Fn-Oup"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FRB-RB-Hth">
+                                <rect key="frame" x="139" y="712" width="136" height="50"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="NMl-Rj-8Hx"/>
+                                </constraints>
+                                <state key="normal" title="Update">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="zAB-cr-96R"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1526,38 +1540,43 @@
                             <constraint firstItem="zAB-cr-96R" firstAttribute="trailing" secondItem="3mJ-74-aj2" secondAttribute="trailing" constant="107" id="1Tb-nd-ee3"/>
                             <constraint firstItem="zAB-cr-96R" firstAttribute="trailing" secondItem="gER-1X-ZdG" secondAttribute="trailing" constant="20" id="Cwr-dL-5fI"/>
                             <constraint firstItem="zAB-cr-96R" firstAttribute="trailing" secondItem="NxO-cn-1db" secondAttribute="trailing" constant="107" id="KxO-1g-Bud"/>
+                            <constraint firstItem="3mJ-74-aj2" firstAttribute="top" secondItem="zAB-cr-96R" secondAttribute="top" constant="55" id="M2S-Kh-lNz"/>
+                            <constraint firstItem="zAB-cr-96R" firstAttribute="trailing" secondItem="3mJ-74-aj2" secondAttribute="trailing" constant="107" id="ND2-m2-bpu"/>
                             <constraint firstItem="zAB-cr-96R" firstAttribute="trailing" secondItem="Xb2-EI-Qxn" secondAttribute="trailing" constant="20" id="Ng0-wo-PIH"/>
                             <constraint firstItem="gER-1X-ZdG" firstAttribute="leading" secondItem="zAB-cr-96R" secondAttribute="leading" constant="20" id="OkZ-AE-MTq"/>
                             <constraint firstItem="Xb2-EI-Qxn" firstAttribute="leading" secondItem="zAB-cr-96R" secondAttribute="leading" constant="20" id="ShM-l6-V7S"/>
                             <constraint firstItem="TPu-as-BRk" firstAttribute="top" secondItem="NxO-cn-1db" secondAttribute="bottom" constant="76" id="TQZ-7Q-gdx"/>
+                            <constraint firstItem="3mJ-74-aj2" firstAttribute="leading" secondItem="zAB-cr-96R" secondAttribute="leading" constant="107" id="fnd-dD-7YX"/>
                             <constraint firstItem="zAB-cr-96R" firstAttribute="trailing" secondItem="TPu-as-BRk" secondAttribute="trailing" constant="20" id="foE-A5-G6q"/>
                             <constraint firstItem="Xb2-EI-Qxn" firstAttribute="top" secondItem="gER-1X-ZdG" secondAttribute="bottom" constant="25" id="gKu-tL-289"/>
                             <constraint firstItem="3mJ-74-aj2" firstAttribute="leading" secondItem="zAB-cr-96R" secondAttribute="leading" constant="107" id="jix-QF-nc0"/>
                             <constraint firstItem="zAB-cr-96R" firstAttribute="trailing" secondItem="TPu-as-BRk" secondAttribute="trailing" constant="20" id="k25-aq-2JE"/>
                             <constraint firstItem="gER-1X-ZdG" firstAttribute="top" secondItem="TPu-as-BRk" secondAttribute="bottom" constant="25" id="l9r-4j-c9f"/>
                             <constraint firstItem="3mJ-74-aj2" firstAttribute="top" secondItem="zAB-cr-96R" secondAttribute="top" constant="55" id="mtz-4o-ztj"/>
+                            <constraint firstItem="FRB-RB-Hth" firstAttribute="leading" secondItem="zAB-cr-96R" secondAttribute="leading" constant="139" id="nhA-wy-dUl"/>
                             <constraint firstItem="TPu-as-BRk" firstAttribute="leading" secondItem="zAB-cr-96R" secondAttribute="leading" constant="20" id="od9-7e-arV"/>
+                            <constraint firstItem="FRB-RB-Hth" firstAttribute="top" secondItem="Xb2-EI-Qxn" secondAttribute="bottom" constant="60" id="pct-Uq-kPa"/>
+                            <constraint firstItem="zAB-cr-96R" firstAttribute="bottom" secondItem="FRB-RB-Hth" secondAttribute="bottom" constant="100" id="qb1-py-FaV"/>
                             <constraint firstItem="zAB-cr-96R" firstAttribute="trailing" secondItem="TPu-as-BRk" secondAttribute="trailing" constant="20" id="rxB-FM-F7f"/>
                             <constraint firstItem="zAB-cr-96R" firstAttribute="trailing" secondItem="3mJ-74-aj2" secondAttribute="trailing" constant="107" id="w76-rv-cdM"/>
                             <constraint firstItem="NxO-cn-1db" firstAttribute="leading" secondItem="zAB-cr-96R" secondAttribute="leading" constant="107" id="xNf-46-lC9"/>
                             <constraint firstItem="NxO-cn-1db" firstAttribute="top" secondItem="3mJ-74-aj2" secondAttribute="bottom" constant="20" id="xtS-99-1VE"/>
                             <constraint firstItem="3mJ-74-aj2" firstAttribute="leading" secondItem="zAB-cr-96R" secondAttribute="leading" constant="107" id="yYD-kr-mVt"/>
+                            <constraint firstItem="zAB-cr-96R" firstAttribute="trailing" secondItem="FRB-RB-Hth" secondAttribute="trailing" constant="139" id="yh6-JP-vAg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="d0r-tV-DMp">
-                        <barButtonItem key="rightBarButtonItem" title="Upload photo" id="BxG-Ln-FJW">
-                            <connections>
-                                <action selector="didTapButton" destination="i3H-DS-Ced" id="SUK-sQ-2jF"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="d0r-tV-DMp"/>
                     <connections>
                         <outlet property="ImageView" destination="3mJ-74-aj2" id="ZHb-Gv-fUF"/>
+                        <outlet property="btnUpdate" destination="FRB-RB-Hth" id="HGd-Pu-F9L"/>
+                        <outlet property="updFirstName" destination="TPu-as-BRk" id="IyB-dM-ovF"/>
+                        <outlet property="updIndexNo" destination="Xb2-EI-Qxn" id="n6q-ei-yay"/>
+                        <outlet property="updLastName" destination="gER-1X-ZdG" id="ZRw-jH-gnc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tXF-GU-DAr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8104.347826086957" y="2457.880434782609"/>
+            <point key="canvasLocation" x="7500" y="1763"/>
         </scene>
     </scenes>
     <resources>

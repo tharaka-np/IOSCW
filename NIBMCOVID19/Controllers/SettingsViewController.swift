@@ -73,7 +73,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        var segueIdentifiers = ["aboutusVC","homeVC"];
+        var segueIdentifiers = ["aboutusVC","homeVC", "", "userprofileconnect"];
         
         if(Auth.auth().currentUser?.uid == nil) {
             segueIdentifiers.insert("signupVC", at: 0)

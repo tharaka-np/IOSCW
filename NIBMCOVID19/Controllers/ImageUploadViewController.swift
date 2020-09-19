@@ -14,40 +14,59 @@ import FirebaseDatabase
 class ImageUploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet var ImageView: UIImageView!
-//    @IBOutlet var label: UILabel!
-    
-    
+    @IBOutlet weak var btnUpdate: UIButton!
+    @IBOutlet weak var updFirstName: UITextField!
+    @IBOutlet weak var updLastName: UITextField!
+    @IBOutlet weak var updIndexNo: UITextField!
     
     private let storage = Storage.storage().reference()
 
     override func viewDidLoad() {
         
-        ImageView.layer.cornerRadius = 20
-        
         super.viewDidLoad()
-//        label.numberOfLines = 0;
-//        label.textAlignment = .center;
+        
+        getUserData()
+        
+        btnUpdate.layer.cornerRadius = 10
+        btnUpdate.clipsToBounds = true
         ImageView.contentMode = .scaleAspectFit
         
-        guard let urlString = UserDefaults.standard.value(forKey: "url") as? String,
-              let url = URL(string: urlString) else{
-            return
-        }
+//        guard let urlString = UserDefaults.standard.value(forKey: "url") as? String,
+//              let url = URL(string: urlString) else{
+//            return
+//        }
         
 //        label.text = urlString
         
-        let task = URLSession.shared.dataTask(with: url, completionHandler: {data, _, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            
-            DispatchQueue.main.sync {
-                let image = UIImage(data: data)
-                self.ImageView.image = image
-            }
-        })
-        
-        task.resume()
+//        let task = URLSession.shared.dataTask(with: url, completionHandler: {data, _, error in
+//            guard let data = data, error == nil else {
+//                return
+//            }
+//
+//            DispatchQueue.main.sync {
+//                let image = UIImage(data: data)
+//                self.ImageView.image = image
+//            }
+//        })
+//
+//        task.resume()
+    }
+    
+    //Get user data
+    
+    private var userDetails: UserDetails? {
+        didSet {
+            updFirstName.text = userDetails?.firstName
+            updLastName.text = userDetails?.lastName
+            updIndexNo.text = userDetails?.indexNo
+        }
+    }
+    
+    func getUserData() {
+        Service.shared.getUserById { (userDetails) in
+            print(userDetails);
+            self.userDetails = userDetails
+        }
     }
     
     @IBAction func didTapButton() {
@@ -70,11 +89,10 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
             return
         }
         
-        //let ref = storage.child("images/file.png")
-//        let user = Auth.auth().currentUser
-//        guard let uid = user?.uid else { return }
+        let user = Auth.auth().currentUser
+        guard let uid = user?.uid else { return }
         
-        storage.child("123").child("file.png").putData(imageData, metadata: nil, completion: {_, error in
+        storage.child(uid).child("file.png").putData(imageData, metadata: nil, completion: {_, error in
             guard error == nil else{
                 print("Failed to upload")
                 return
@@ -95,16 +113,18 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController){
         picker.dismiss(animated: true, completion: nil)
     }
-    
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension UIImageView {
+    func load(url: URL){
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url){
+                if let image = UIImage(data: data){
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
     }
-    */
-
 }
