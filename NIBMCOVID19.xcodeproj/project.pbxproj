@@ -29,6 +29,10 @@
 		3F7EA3282514E7470062DF69 /* Surv4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7EA3272514E7470062DF69 /* Surv4ViewController.swift */; };
 		3F7EA32A2514E7CC0062DF69 /* ThankyouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7EA3292514E7CC0062DF69 /* ThankyouViewController.swift */; };
 		3F7EA32C2515293B0062DF69 /* ImageUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7EA32B2515293B0062DF69 /* ImageUploadViewController.swift */; };
+		3FCA595E25161E4D007FBB64 /* RoundedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA595D25161E4D007FBB64 /* RoundedImageView.swift */; };
+		3FCA596525163A55007FBB64 /* CreateNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA596425163A55007FBB64 /* CreateNotificationViewController.swift */; };
+		3FCA596825163C0E007FBB64 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA596725163C0E007FBB64 /* Notification.swift */; };
+		3FCA596F25163FF7007FBB64 /* DatesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA596E25163FF7007FBB64 /* DatesHelper.swift */; };
 		C275981F7FE60216728B1072 /* Pods_NIBMCOVID19.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0072174493CDA922BCF726EE /* Pods_NIBMCOVID19.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +63,10 @@
 		3F7EA3272514E7470062DF69 /* Surv4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Surv4ViewController.swift; sourceTree = "<group>"; };
 		3F7EA3292514E7CC0062DF69 /* ThankyouViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThankyouViewController.swift; sourceTree = "<group>"; };
 		3F7EA32B2515293B0062DF69 /* ImageUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadViewController.swift; sourceTree = "<group>"; };
+		3FCA595D25161E4D007FBB64 /* RoundedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImageView.swift; sourceTree = "<group>"; };
+		3FCA596425163A55007FBB64 /* CreateNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNotificationViewController.swift; sourceTree = "<group>"; };
+		3FCA596725163C0E007FBB64 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		3FCA596E25163FF7007FBB64 /* DatesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesHelper.swift; sourceTree = "<group>"; };
 		81EF11595A2CEA77D6374D30 /* Pods-NIBMCOVID19.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NIBMCOVID19.release.xcconfig"; path = "Target Support Files/Pods-NIBMCOVID19/Pods-NIBMCOVID19.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +95,7 @@
 			children = (
 				3F1323322515B88900965A3A /* Model.swift */,
 				3F1323352515B95F00965A3A /* Users.swift */,
+				3FCA596725163C0E007FBB64 /* Notification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -138,6 +147,8 @@
 				3F502E5C25139DD100A879B2 /* SettingsViewController.swift */,
 				3F7EA31E2514C06F0062DF69 /* LoginViewController.swift */,
 				3F7EA32B2515293B0062DF69 /* ImageUploadViewController.swift */,
+				3FCA596425163A55007FBB64 /* CreateNotificationViewController.swift */,
+				3FCA596E25163FF7007FBB64 /* DatesHelper.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -146,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				3F502E5A25137C1E00A879B2 /* CardView.swift */,
+				3FCA595D25161E4D007FBB64 /* RoundedImageView.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -309,7 +321,11 @@
 				3F1323332515B88900965A3A /* Model.swift in Sources */,
 				3F502E592513787200A879B2 /* UpdatesViewController.swift in Sources */,
 				3F13232E2515B78300965A3A /* ServiceLayer.swift in Sources */,
+				3FCA595E25161E4D007FBB64 /* RoundedImageView.swift in Sources */,
+				3FCA596525163A55007FBB64 /* CreateNotificationViewController.swift in Sources */,
 				3F7EA3262514E59A0062DF69 /* Surv3ViewController.swift in Sources */,
+				3FCA596F25163FF7007FBB64 /* DatesHelper.swift in Sources */,
+				3FCA596825163C0E007FBB64 /* Notification.swift in Sources */,
 				3F7EA32C2515293B0062DF69 /* ImageUploadViewController.swift in Sources */,
 				3F502E5D25139DD100A879B2 /* SettingsViewController.swift in Sources */,
 				3F7EA32A2514E7CC0062DF69 /* ThankyouViewController.swift in Sources */,

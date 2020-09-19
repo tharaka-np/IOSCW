@@ -29,27 +29,8 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
         
         btnUpdate.layer.cornerRadius = 10
         btnUpdate.clipsToBounds = true
-        ImageView.contentMode = .scaleAspectFit
         
-//        guard let urlString = UserDefaults.standard.value(forKey: "url") as? String,
-//              let url = URL(string: urlString) else{
-//            return
-//        }
-        
-//        label.text = urlString
-        
-//        let task = URLSession.shared.dataTask(with: url, completionHandler: {data, _, error in
-//            guard let data = data, error == nil else {
-//                return
-//            }
-//
-//            DispatchQueue.main.sync {
-//                let image = UIImage(data: data)
-//                self.ImageView.image = image
-//            }
-//        })
-//
-//        task.resume()
+        ImageView.roundImageView()
     }
     
     //Get user data
@@ -59,7 +40,30 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
             updFirstName.text = userDetails?.firstName
             updLastName.text = userDetails?.lastName
             updIndexNo.text = userDetails?.indexNo
+            
+
+            
+            if let profileImgUrl = userDetails?.imageUrl {
+                if let url = URL(string:profileImgUrl){
+                    downloadImage(from: url)
+                }
+            }
         }
+    }
+    
+    func downloadImage(from url: URL) {
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+            DispatchQueue.main.async() { [weak self] in
+                self?.ImageView.image = UIImage(data: data)
+            }
+        }
+    }
+    
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
     func getUserData() {
@@ -98,33 +102,40 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
                 return
             }
             
-            self.storage.child("images/file.png").downloadURL(completion: {url, error in
+            self.storage.child(uid).child("file.png").downloadURL(completion: {url, error in
                 guard let url = url, error == nil else{
                     return
                 }
                 
-                let urlString = url.absoluteString
-                print("Image URL: \(urlString)")
-                UserDefaults.standard.set(urlString, forKey: "url")
+                
+                if let urlString : String = url.absoluteString{
+                    print("Image URL: \(urlString)")
+                    self.downloadImage(from: URL(string:urlString)!)
+                    UserDefaults.standard.set(urlString, forKey: "url")
+                    
+                    Service.shared.updateUserProfileImage(urlString)
+                }
             })
         })
     }
-
+    
+    
+    @IBAction func userDetailsHandler(_ sender: Any) {
+            
+        guard let fname = updFirstName.text else {return}
+        guard let lname = updLastName.text else {return}
+        guard let index = updIndexNo.text else {return}
+        
+        let values = [
+        "firstName":fname,
+        "lastName":lname,
+        "indexNo":index
+        ] as [String : Any]
+        
+        Service.shared.updateUserDetails(values)
+    }
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController){
         picker.dismiss(animated: true, completion: nil)
-    }
-}
-
-extension UIImageView {
-    func load(url: URL){
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url){
-                if let image = UIImage(data: data){
-                    DispatchQueue.main.async {
-                        self?.image = image
-                    }
-                }
-            }
-        }
     }
 }

@@ -11,7 +11,7 @@ import Firebase
 let DB_REF = Database.database().reference()
 let USER_REF = DB_REF.child("users")
 //let RFF_TEMPINFO = DB_REF.child("TemperatureDetails")
-//let REFF_NOTIFICATION = DB_REF.child("Notifications")
+let REFF_NOTIFICATION = DB_REF.child("Notifications")
 //let REF_USERLOCATIONS = DB_REF.child("userLocationDetails")
 
 
@@ -50,7 +50,7 @@ struct Service {
             let acctype = value?["accountType"] as? String ?? ""
             let pwd = value?["password"] as? String ?? ""
             let index = value?["indexNo"] as? String ?? ""
-            let image = value?["imageUrl"] as? String ?? ""
+            let image = value?["dpUrl"] as? String ?? ""
                         
             let user = UserDetails(accountType:acctype as String?, email:mail as String?, firstName:fname as String?, lastName: lname as String?, password: pwd as String?, indexNo: index as String?, imageUrl: image as String?)
             
@@ -93,6 +93,41 @@ struct Service {
 //            completion(users)
 //
 //        })
+    }
+    
+    func updateUserProfileImage(_ imageurl: String){
+        
+        let values = [
+          "dpUrl":imageurl
+              ]as [String : Any]
+        
+      
+            
+        let user = Auth.auth().currentUser
+        guard let uid = user?.uid else { return }
+
+        Database.database().reference().child("users").child(uid).updateChildValues(values) { (error, ref) in
+            print("Successfuly updated user profile image")
+        }
+        
+    }
+    
+    func updateUserDetails(_ details: [String:Any]){
+        let user = Auth.auth().currentUser
+        guard let uid = user?.uid else { return }
+
+        Database.database().reference().child("users").child(uid).updateChildValues(details) { (error, ref) in
+            print("Successfuly updated user info")
+        }
+    }
+    
+    //post notifications
+    func addNewNotification(_ value: [String:Any])->Int{
+            
+        guard let key = REFF_NOTIFICATION.childByAutoId().key else { return 1}
+        REFF_NOTIFICATION.child(key).updateChildValues(value){(error, ref) in }
+        print("Notification added auccessfully...")
+        return 0
     }
     
     
