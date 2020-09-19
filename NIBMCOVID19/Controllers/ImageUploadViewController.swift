@@ -10,6 +10,7 @@ import UIKit
 import FirebaseStorage
 import FirebaseAuth
 import FirebaseDatabase
+import Kingfisher
 
 class ImageUploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -59,6 +60,7 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
             updFirstName.text = userDetails?.firstName
             updLastName.text = userDetails?.lastName
             updIndexNo.text = userDetails?.indexNo
+            ImageView.kf.setImage(with: URL("https://picsum.photos/200"))
         }
     }
     
