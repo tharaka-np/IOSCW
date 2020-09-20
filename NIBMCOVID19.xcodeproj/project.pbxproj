@@ -10,6 +10,8 @@
 		3F13232E2515B78300965A3A /* ServiceLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13232D2515B78300965A3A /* ServiceLayer.swift */; };
 		3F1323332515B88900965A3A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1323322515B88900965A3A /* Model.swift */; };
 		3F1323362515B95F00965A3A /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1323352515B95F00965A3A /* Users.swift */; };
+		3F314FB325168F3F0066B0C9 /* Temparature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F314FB225168F3F0066B0C9 /* Temparature.swift */; };
+		3F3F01A42516AED10007359F /* AllNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3F01A32516AED10007359F /* AllNotificationsViewController.swift */; };
 		3F40695D250DF6AD000D1BFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F40695C250DF6AD000D1BFD /* AppDelegate.swift */; };
 		3F40695F250DF6AD000D1BFD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F40695E250DF6AD000D1BFD /* SceneDelegate.swift */; };
 		3F406961250DF6AD000D1BFD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F406960250DF6AD000D1BFD /* ViewController.swift */; };
@@ -33,6 +35,10 @@
 		3FCA596525163A55007FBB64 /* CreateNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA596425163A55007FBB64 /* CreateNotificationViewController.swift */; };
 		3FCA596825163C0E007FBB64 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA596725163C0E007FBB64 /* Notification.swift */; };
 		3FCA596F25163FF7007FBB64 /* DatesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA596E25163FF7007FBB64 /* DatesHelper.swift */; };
+		3FFC157A25178844002E7E0D /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFC157925178844002E7E0D /* MapModel.swift */; };
+		3FFC157D2517911F002E7E0D /* MapMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFC157C2517911F002E7E0D /* MapMarker.swift */; };
+		3FFC15802517A9E1002E7E0D /* SingleMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFC157F2517A9E1002E7E0D /* SingleMapViewController.swift */; };
+		3FFC15832517B6C3002E7E0D /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFC15822517B6C3002E7E0D /* Survey.swift */; };
 		C275981F7FE60216728B1072 /* Pods_NIBMCOVID19.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0072174493CDA922BCF726EE /* Pods_NIBMCOVID19.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +48,8 @@
 		3F13232D2515B78300965A3A /* ServiceLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLayer.swift; sourceTree = "<group>"; };
 		3F1323322515B88900965A3A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		3F1323352515B95F00965A3A /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		3F314FB225168F3F0066B0C9 /* Temparature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temparature.swift; sourceTree = "<group>"; };
+		3F3F01A32516AED10007359F /* AllNotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllNotificationsViewController.swift; sourceTree = "<group>"; };
 		3F406959250DF6AD000D1BFD /* NIBMCOVID19.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NIBMCOVID19.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F40695C250DF6AD000D1BFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F40695E250DF6AD000D1BFD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +75,10 @@
 		3FCA596425163A55007FBB64 /* CreateNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNotificationViewController.swift; sourceTree = "<group>"; };
 		3FCA596725163C0E007FBB64 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		3FCA596E25163FF7007FBB64 /* DatesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesHelper.swift; sourceTree = "<group>"; };
+		3FFC157925178844002E7E0D /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
+		3FFC157C2517911F002E7E0D /* MapMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarker.swift; sourceTree = "<group>"; };
+		3FFC157F2517A9E1002E7E0D /* SingleMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleMapViewController.swift; sourceTree = "<group>"; };
+		3FFC15822517B6C3002E7E0D /* Survey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
 		81EF11595A2CEA77D6374D30 /* Pods-NIBMCOVID19.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NIBMCOVID19.release.xcconfig"; path = "Target Support Files/Pods-NIBMCOVID19/Pods-NIBMCOVID19.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,6 +108,9 @@
 				3F1323322515B88900965A3A /* Model.swift */,
 				3F1323352515B95F00965A3A /* Users.swift */,
 				3FCA596725163C0E007FBB64 /* Notification.swift */,
+				3F314FB225168F3F0066B0C9 /* Temparature.swift */,
+				3FFC157925178844002E7E0D /* MapModel.swift */,
+				3FFC15822517B6C3002E7E0D /* Survey.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -149,6 +164,8 @@
 				3F7EA32B2515293B0062DF69 /* ImageUploadViewController.swift */,
 				3FCA596425163A55007FBB64 /* CreateNotificationViewController.swift */,
 				3FCA596E25163FF7007FBB64 /* DatesHelper.swift */,
+				3F3F01A32516AED10007359F /* AllNotificationsViewController.swift */,
+				3FFC157F2517A9E1002E7E0D /* SingleMapViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -158,6 +175,7 @@
 			children = (
 				3F502E5A25137C1E00A879B2 /* CardView.swift */,
 				3FCA595D25161E4D007FBB64 /* RoundedImageView.swift */,
+				3FFC157C2517911F002E7E0D /* MapMarker.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -308,13 +326,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F7EA31F2514C06F0062DF69 /* LoginViewController.swift in Sources */,
+				3FFC157A25178844002E7E0D /* MapModel.swift in Sources */,
+				3F314FB325168F3F0066B0C9 /* Temparature.swift in Sources */,
 				3F502E5B25137C1E00A879B2 /* CardView.swift in Sources */,
 				3F7EA3242514E2850062DF69 /* Surv2ViewController.swift in Sources */,
 				3F502E57251375CF00A879B2 /* HomeViewController.swift in Sources */,
 				3F406961250DF6AD000D1BFD /* ViewController.swift in Sources */,
 				3F40695D250DF6AD000D1BFD /* AppDelegate.swift in Sources */,
+				3FFC157D2517911F002E7E0D /* MapMarker.swift in Sources */,
+				3FFC15832517B6C3002E7E0D /* Survey.swift in Sources */,
 				3F502E55251261B200A879B2 /* SignUpViewController.swift in Sources */,
 				3F7EA3282514E7470062DF69 /* Surv4ViewController.swift in Sources */,
+				3FFC15802517A9E1002E7E0D /* SingleMapViewController.swift in Sources */,
 				3F7EA3222514E0680062DF69 /* Surv1ViewController.swift in Sources */,
 				3F40695F250DF6AD000D1BFD /* SceneDelegate.swift in Sources */,
 				3F1323362515B95F00965A3A /* Users.swift in Sources */,
@@ -323,6 +346,7 @@
 				3F13232E2515B78300965A3A /* ServiceLayer.swift in Sources */,
 				3FCA595E25161E4D007FBB64 /* RoundedImageView.swift in Sources */,
 				3FCA596525163A55007FBB64 /* CreateNotificationViewController.swift in Sources */,
+				3F3F01A42516AED10007359F /* AllNotificationsViewController.swift in Sources */,
 				3F7EA3262514E59A0062DF69 /* Surv3ViewController.swift in Sources */,
 				3FCA596F25163FF7007FBB64 /* DatesHelper.swift in Sources */,
 				3FCA596825163C0E007FBB64 /* Notification.swift in Sources */,

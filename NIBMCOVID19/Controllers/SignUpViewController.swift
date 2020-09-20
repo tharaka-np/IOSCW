@@ -31,11 +31,31 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
         self.createAndSetupPickerView()
         self.dissmissAndClosePicker()
         
+        locationManager.requestAlwaysAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        }
+        
         // Do any additional setup after loading the view.
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
+            
+            let long = location.coordinate.latitude
+            let lat = location.coordinate.longitude
+            
+            let values = [
+            "longitude":long,
+            "latitude":lat,
+            "uid": Service.shared.getUserUid()
+            ] as [String : Any]
+            
+            Service.shared.updateUserCordinates(values)
+            
             print(location.coordinate.latitude)
             print(location.coordinate.longitude)
         }
@@ -69,16 +89,6 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBAction func handleSignUp(_ sender: Any) {
         
-        locationManager.requestAlwaysAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
-        }
-        
-        print("Ok")
-        
         guard let fname = firstName.text else {return}
         guard let mail = email.text else {return}
         guard let pwd = password.text else {return}
@@ -95,7 +105,6 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
         ] as [String : Any]
 
         Auth.auth().createUser(withEmail: mail, password: pwd) { (result, error) in
-            print("----------------------------------------")
             if let error = error {
                 print("Faild to register user with error \(error)")
                 return
@@ -103,22 +112,23 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
             guard let uid = result?.user.uid else { return }
 
             Database.database().reference().child("users").child(uid).updateChildValues(values) { (error, ref) in
-                print("Successfuly Registerd and save data..")
+                DispatchQueue.main.async {
+
+                    let mianStorybord = UIStoryboard(name:"Main", bundle: Bundle.main)
+                    guard let signInVC = mianStorybord.instantiateViewController(withIdentifier: "LoginVC") as?
+                        LoginViewController else{
+                            return
+                    }
+
+                    let navigation = UINavigationController(rootViewController: signInVC)
+                    navigation.modalPresentationStyle = .fullScreen
+                    self.present(navigation,animated: true,completion: nil)
+
+                }
             }
 
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension SignUpViewController: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate{

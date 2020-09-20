@@ -65,11 +65,11 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Program requires GPS to track cars and job orders</string>
+	<string>Program requires to access your location in order to provide more accurate data</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Program requires GPS to track cars and job orders</string>
+	<string>Program requires to access your location in order to provide more accurate data</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Program requires GPS to track cars and job orders</string>
+	<string>Program requires to access your location in order to provide more accurate data</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please allow access to upload photos</string>
 </dict>

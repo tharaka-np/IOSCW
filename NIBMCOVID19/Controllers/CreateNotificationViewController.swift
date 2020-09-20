@@ -10,6 +10,9 @@ import UIKit
 
 class CreateNotificationViewController: UIViewController {
     
+    @IBOutlet weak var msgHeading: UITextField!
+    @IBOutlet weak var msgBody: UITextField!
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -18,27 +21,18 @@ class CreateNotificationViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    let notificationArray = [
-        "uid": Service.shared.getUserUid(),
-        "description":"TEST1",
-        "syncDateTime":DatesHelper.shared.getNowDate(Date())
-        ]as [String:Any]
-    
-    
-    @IBAction func notificationHandler(_ sender: Any) {
+    @IBAction func notificationSend(_ sender: Any) {
+        
+        guard let head = msgHeading.text else {return}
+        guard let body = msgBody.text else {return}
+        
+        let notificationArray = [
+            "uid": Service.shared.getUserUid(),
+            "title": head,
+            "description": body,
+            "syncDateTime":DatesHelper.shared.getNowDate(Date())
+            ]as [String:Any]
         
         Service.shared.addNewNotification(notificationArray)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -1,8 +1,8 @@
 //
-//  HomeViewController.swift
+//  SingleMapViewController.swift
 //  NIBMCOVID19
 //
-//  Created by Tharaka Pathirana on 9/17/20.
+//  Created by Tharaka Pathirana on 9/20/20.
 //  Copyright © 2020 Tharaka Pathirana. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import CoreLocation
 import MapKit
 import Firebase
 
-class HomeViewController: UIViewController {
+class SingleMapViewController: UIViewController {
     
     let locationManager = CLLocationManager()
     var lati: Double = 0
@@ -21,19 +21,14 @@ class HomeViewController: UIViewController {
     
     var mLocation : MapMarker!
     
-    @IBOutlet weak var mapView: MKMapView!
     
-    @IBOutlet weak var latestMsg: UILabel!
+    @IBOutlet weak var largeMap: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Home"
-        getLastNotification()
         locationManager.requestAlwaysAuthorization()
-        
         fetchDataMapLocations()
-        
-//        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        // Do any additional setup after loading the view.
         
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
@@ -45,32 +40,16 @@ class HomeViewController: UIViewController {
             }
         }
         
-        mapView.delegate = self
-        mapView.showsUserLocation = true
+        largeMap.delegate = self
+        largeMap.showsUserLocation = true
         
         mLocation = MapMarker(coordinate: CLLocationCoordinate2D(latitude: lati, longitude: long))
-        
-       
-    }
-    
-    private var lastNotification : [notification]? {
-            didSet {
-                if lastNotification?.count ?? 0 > 0{
-                    latestMsg.text = lastNotification?[0].title
-                }
-            }
-        }
-    
-    func getLastNotification(){
-        Service.shared.getLastNotification{ (notification) in
-            self.lastNotification = allNotification
-        }
     }
     
     func mapData(locations: [MapModel]){
         print(locations)
         self.mapLocations.removeAll()
-        self.mapView.removeAnnotations(mapView.annotations)
+        self.largeMap.removeAnnotations(largeMap.annotations)
         
         self.mapLocations.append(contentsOf: locations)
         self.mapLocations = locations
@@ -81,7 +60,7 @@ class HomeViewController: UIViewController {
         for data in mapLocations{
             
             if data.uid == Auth.auth().currentUser?.uid ?? "" {
-                self.mapView.addAnnotation(mLocation)
+                self.largeMap.addAnnotation(mLocation)
                 continue
             }
             
@@ -95,7 +74,7 @@ class HomeViewController: UIViewController {
                 
             }
             
-            self.mapView.addAnnotation(pin)
+            self.largeMap.addAnnotation(pin)
         }
     }
     
@@ -145,11 +124,10 @@ class HomeViewController: UIViewController {
         })
         
     }
-    
-    
+
 }
 
-extension HomeViewController :  MKMapViewDelegate{
+extension SingleMapViewController :  MKMapViewDelegate{
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let annotionView = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
         
@@ -170,7 +148,7 @@ extension HomeViewController :  MKMapViewDelegate{
     }
 }
 
-extension HomeViewController : CLLocationManagerDelegate {
+extension SingleMapViewController : CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
@@ -183,15 +161,15 @@ extension HomeViewController : CLLocationManagerDelegate {
 //
 //            let dat = Service.shared.updateUserCordinates(values)
             
-            mapView.removeAnnotation(mLocation)
+            largeMap.removeAnnotation(mLocation)
             mLocation = MapMarker(coordinate: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude))
             mLocation.title = "I AM"
-            self.mapView.addAnnotation(mLocation)
+            self.largeMap.addAnnotation(mLocation)
             
             lati = location.coordinate.latitude
             long = location.coordinate.longitude
             let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-            self.mapView.setRegion(region, animated: true)
+            self.largeMap.setRegion(region, animated: true)
             
         }
     }
@@ -201,6 +179,3 @@ extension HomeViewController : CLLocationManagerDelegate {
     }
 
 }
-
-
-

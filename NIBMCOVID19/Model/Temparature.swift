@@ -6,4 +6,16 @@
 //  Copyright © 2020 Tharaka Pathirana. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+struct Temparature {
+    
+    var lastTime: String?
+    var temparature: Int?
+    
+    
+    init(lastTime: String?, temparature: Int?) {
+        self.lastTime = lastTime
+        self.temparature = temparature
+    }
+}

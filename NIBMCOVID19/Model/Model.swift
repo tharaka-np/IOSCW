@@ -21,4 +21,6 @@ struct MapLocations {
         self.uid = uid
         self.syncDateTime = syncDateTime
     }
+    
+    
 }

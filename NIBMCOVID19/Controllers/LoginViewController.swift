@@ -37,8 +37,16 @@ class LoginViewController: UIViewController {
             }
             
             print("Login success");
+            self.performSegue(withIdentifier: "gotohomeseg", sender: nil)
+//            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//            let newViewController = storyBoard.instantiateViewController(withIdentifier: "homeVC") as! HomeViewController
+//                    self.present(newViewController, animated: true, completion: nil)
             //self.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
 

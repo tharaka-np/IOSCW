@@ -27,27 +27,28 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Settings"
         
         if(Auth.auth().currentUser?.uid == nil) {
             let createUser = MenuItems(name: "Create new user")
             menuArray.append(createUser)
         }
             
-        let aboutUs = MenuItems(name: "About/Contact us")
+        let aboutUs = MenuItems(name: "About / Contact us")
         menuArray.append(aboutUs)
         
-        let share = MenuItems(name: "Share with friends")
-        menuArray.append(share)
+//        let share = MenuItems(name: "Share with friends")
+//        menuArray.append(share)
         
-        let surveyResults = MenuItems(name: "Survey Results")
-        menuArray.append(surveyResults)
+//        let surveyResults = MenuItems(name: "Survey Results")
+//        menuArray.append(surveyResults)
         
-        let profile = MenuItems(name: "Profile")
-        menuArray.append(profile)
-        
-        let logOut = MenuItems(name: "Logout")
-        menuArray.append(logOut)
+        if(Auth.auth().currentUser?.uid != nil) {
+            let profile = MenuItems(name: "Profile")
+            menuArray.append(profile)
+            
+            let logOut = MenuItems(name: "Logout")
+            menuArray.append(logOut)
+        }
         
         tblMenu.dataSource = self
         tblMenu.delegate = self
@@ -73,23 +74,43 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        var segueIdentifiers = ["aboutusVC","homeVC", "", "userprofileconnect"];
+        print("//////////////////////")
+        print([indexPath.row])
         
+        var segueIdentifiers = ["aboutusVC"];
+
         if(Auth.auth().currentUser?.uid == nil) {
             segueIdentifiers.insert("signupVC", at: 0)
         }
         
+        if(Auth.auth().currentUser?.uid != nil) {
+            segueIdentifiers.insert("userprofileconnect", at: 1)
+            segueIdentifiers.insert("logout", at: 2)
+        }
         
-        if(String(segueIdentifiers[indexPath.row]) == "homeVC"){
+        if String(segueIdentifiers[indexPath.row]) == "logout" {
             do {
                 try Auth.auth().signOut()
-                performSegue(withIdentifier: "homeVC", sender: self)
+                DispatchQueue.main.async {
+                    let mianStorybord = UIStoryboard(name:"Main", bundle: Bundle.main)
+                    guard let signInVC = mianStorybord.instantiateViewController(withIdentifier: "LoginVC") as?
+                        LoginViewController else{
+                            return
+                    }
+
+                    let navigation = UINavigationController(rootViewController: signInVC)
+                    navigation.modalPresentationStyle = .fullScreen
+                    self.present(navigation,animated: true,completion: nil)
+
+                }
+                
             } catch {
-                print("DEBUG: sign out error")
+                print ("DEBUG: sign out error")
             }
-        }else{
+        }else {
             tableView.deselectRow(at: indexPath, animated: true)
             performSegue(withIdentifier: segueIdentifiers[indexPath.row], sender: self)
-       }
+
+        }
     }
 }

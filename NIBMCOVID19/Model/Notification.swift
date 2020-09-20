@@ -10,12 +10,14 @@ import UIKit
 
 struct notification {
     
+    let title: String?
     let description: String?
     let syncDateTime: String?
     let uid: String?
 
     
-    init(description:String? , syncDateTime:String?, uid:String? ) {
+    init(title:String?, description:String? , syncDateTime:String?, uid:String? ) {
+        self.title = title;
         self.description = description;
         self.syncDateTime = syncDateTime;
         self.uid = uid;

@@ -51,7 +51,8 @@ class Surv2ViewController: UIViewController {
     func submitQuiz2(setSurveyStatus surveyStatus:Int){
       
       let values = [
-        "quiz2":surveyStatus
+        "quiz2":surveyStatus,
+        "syncDateTime": DatesHelper.shared.getNowDate(Date())
             ]as [String : Any]
     
           

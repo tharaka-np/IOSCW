@@ -10,25 +10,19 @@ import Firebase
 
 let DB_REF = Database.database().reference()
 let USER_REF = DB_REF.child("users")
-//let RFF_TEMPINFO = DB_REF.child("TemperatureDetails")
 let REFF_NOTIFICATION = DB_REF.child("Notifications")
-//let REF_USERLOCATIONS = DB_REF.child("userLocationDetails")
+let REF_USERLOCATIONS = DB_REF.child("userCoordinates")
+let REF_USERSURVEYS = DB_REF.child("survey")
 
-
-//var allNotification = [notificationModel]()
-
-
+var allNotification = [notification]()
 
 struct Service {
     
     static let shared = Service()
-
-
+    
     func getUserUid() ->String{
         return Auth.auth().currentUser?.uid ?? ""
     }
-    
-    
     
     func signOut() ->String {
         do {
@@ -95,6 +89,33 @@ struct Service {
 //        })
     }
     
+    func getUserTempById(completion: @escaping(Temparature) -> Void) {
+        
+        REF_USERLOCATIONS.child(getUserUid()).observe(DataEventType.value, with : { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            let temp = value?["temp"] as? Int ?? 30
+            let date = value?["syncDateTime"] as? String ?? ""
+            
+                        
+            let userTemp = Temparature(lastTime:date as String?, temparature:temp as Int)
+            
+            completion(userTemp)
+        })
+    }
+    
+    func getUserLastSurveyById(completion: @escaping(Survey) -> Void) {
+        
+        REF_USERSURVEYS.child(getUserUid()).observe(DataEventType.value, with : { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            let date = value?["syncDateTime"] as? String ?? ""
+            
+                        
+            let userLastSurvey = Survey(lastSurveyTime:date as String?)
+            
+            completion(userLastSurvey)
+        })
+    }
+    
     func updateUserProfileImage(_ imageurl: String){
         
         let values = [
@@ -130,125 +151,91 @@ struct Service {
         return 0
     }
     
+    func updateUserCordinates(_ details: [String:Any])->Int{
+        
+        let user = Auth.auth().currentUser
+        guard let uid = user?.uid else { return 0}
+        REF_USERLOCATIONS.child(uid).updateChildValues(details){(error, ref) in }
+        print("Coordinates added auccessfully...")
+        return 0
+    }
     
+    func updateUserTemp(_ temp: [String:Any]){
+        
+        let user = Auth.auth().currentUser
+        guard let uid = user?.uid else { return }
+
+        Database.database().reference().child("userCoordinates").child(uid).updateChildValues(temp) { (error, ref) in
+            print("Successfuly updated user temparature")
+        }
+    }
     
-//    //Mark: Update user Temperature details
-//
-//    func updateUserTemperture(_ value: [String:Any] )->Int{
-//            RFF_TEMPINFO.child(getUserUid()).updateChildValues(value){(error, ref) in }
-//             return 0
-//    }
-//
-//
-//    //Get user Temperature details
-//    func getUserTemperatureDetails(completion: @escaping(temperatureModal) -> Void) {
-//        RFF_TEMPINFO.child(getUserUid()).observe(DataEventType.value, with : { (snapshot) in
-//            guard let dictionary = snapshot.value as? [String: Any] else { return }
-//            let userTemperatureDetails = temperatureModal(dictionary: dictionary)
-//            completion(userTemperatureDetails)
-//        })
-//    }
+    func fetchDataMapLocations(completion: @escaping([MapModel]) -> Void) {
+        
+        var mapLocation : [MapModel] = []
+        
+        
+        Database.database().reference().child("userCoordinates").observe(.childChanged, with: {
+            snapshot in
+            
+            Database.database().reference().ref.child("userCoordinates").observeSingleEvent(of: .value, with: { snapshot in
+                
+                mapLocation.removeAll()
+                
+                if let dict = snapshot.value as? [String: Any] {
+                    for loc in dict{
+                        guard let innerDict = loc.value as? [String: Any] else {
+                            continue
+                        }
+                        
+                        mapLocation.append(MapModel(latitude: innerDict["latitude"] as! Double, longtitude: innerDict["longitude"] as! Double, uid: innerDict["uid"] as! String, temp: innerDict["temp"] as! Int, syncDateTime: innerDict["syncDateTime"] as! String))
+                    }
+                    completion(mapLocation)
+                }
+                
+            })
+            
+        })
+        
+        Database.database().reference().child("userCoordinates").observeSingleEvent(of: .value, with: { snapshot in
+            
+            if let Dict = snapshot.value as? [String: Any] {
+                
+                for (_,value) in Dict {
+                    guard let innerDict = value as? [String: Any] else {
+                        continue
+                    }
+                    
+                    mapLocation.append(MapModel(latitude: innerDict["latitude"] as! Double, longtitude: innerDict["longitude"] as! Double, uid: innerDict["uid"] as! String, temp: innerDict["temp"] as! Int, syncDateTime: innerDict["syncDateTime"] as! String))
+                    
+                }
+                
+                print(mapLocation)
+                completion(mapLocation)
+            }
+        })
+        
+    }
     
-    
-//    //post notifications
-//    func postNotification(_ value: [String:Any])->Int{
-//
-//        guard let key = REFF_NOTIFICATION.childByAutoId().key else { return 1}
-//        REFF_NOTIFICATION.child(key).updateChildValues(value){(error, ref) in }
-//        return 0
-//    }
-//
-//
-//
-//
-//    //Get all notifications
-//    func getNotifications(completion: @escaping([notificationModel]) -> Void) {
-//
-//        allNotification.removeAll()
-//
-//        REFF_NOTIFICATION.observe(DataEventType.value, with: { (snapshot) in
-//
-//            for dataSet in snapshot.children.allObjects as![DataSnapshot]{
-//                let singleData = dataSet.value as? [String:AnyObject]
-//
-//                let description = singleData?["description"]
-//                let syncDateTime = singleData?["syncDateTime"]
-//                let uid = singleData?["uid"]
-//
-//               let notification = notificationModel(description:description as! String?, syncDateTime:syncDateTime as! String? , uid:uid as! String?)
-//                allNotification.append(notification)
-//            }
-//
-//            completion(allNotification)
-//
-//        })
-//
-//    }
-//
-//
-//
-//
-//
-//
-//
-//    func getLastNotification(completion: @escaping([notificationModel]) -> Void) {
-//
-//        allNotification.removeAll()
-//
-//        let recentPostsQuery = (REFF_NOTIFICATION.queryLimited(toLast: 1))
-//        recentPostsQuery.observe(DataEventType.value, with: { (snapshot) in
-//
-//            for dataSet in snapshot.children.allObjects as![DataSnapshot]{
-//                let singleData = dataSet.value as? [String:AnyObject]
-//
-//                let description = singleData?["description"]
-//                let syncDateTime = singleData?["syncDateTime"]
-//                let uid = singleData?["uid"]
-//
-//               let notification = notificationModel(description:description as! String?, syncDateTime:syncDateTime as! String? , uid:uid as! String?)
-//                allNotification.append(notification)
-//            }
-//
-//            completion(allNotification)
-//
-//        })
-//    }
-//
-//
-//    func userCreation(_ value: [String:Any] )->Void{
-//            REF_USERS.child(getUserUid()).updateChildValues(value){(error, ref) in }
-//    }
-//
-//
-//    func syncUserLocation(_ value: [String:Any] ) ->Void{
-//        REF_USERLOCATIONS.child(getUserUid()).updateChildValues(value){(error, ref) in }
-//    }
-//
-//
-//    func getLocationUpdates(completion: @escaping([MapLocations]) -> Void) {
-//        var mapLocation : [MapLocations] = []
-//
-//        mapLocation.removeAll()
-//
-//         REF_USERLOCATIONS.observe(DataEventType.value, with: { (snapshot) in
-//
-//             for dataSet in snapshot.children.allObjects as![DataSnapshot]{
-//                 let singleData = dataSet.value as? [String:AnyObject]
-//
-//                 let lat = singleData?["lat"]
-//                 let log = singleData?["log"]
-//                 let uid = singleData?["uid"]
-//                 let syncDateTime = singleData?["syncDateTime"]
-//
-//
-//                mapLocation.append(MapLocations(lat: lat as! Double, log: log as! Double, uid: uid as! String, syncDateTime: syncDateTime as! String))
-//
-//             }
-//
-//             completion(mapLocation)
-//
-//         })
-//
-//
-//        }
+    func getLastNotification(completion: @escaping([notification]) -> Void) {
+            
+        let recentPostsQuery = (REFF_NOTIFICATION.queryLimited(toLast: 1))
+        recentPostsQuery.observe(DataEventType.value, with: { (snapshot) in
+
+            for dataSet in snapshot.children.allObjects as![DataSnapshot]{
+                let singleData = dataSet.value as? [String:AnyObject]
+
+                let description = singleData?["description"]
+                let title = singleData?["title"]
+                let syncDateTime = singleData?["syncDateTime"]
+                let uid = singleData?["uid"]
+
+                let notific = notification(title: title as! String?, description: description as! String?, syncDateTime:syncDateTime as! String? , uid:uid as! String?)
+                allNotification.append(notific)
+            }
+
+            completion(allNotification)
+
+        })
+    }
 }
