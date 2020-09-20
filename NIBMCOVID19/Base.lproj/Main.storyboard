@@ -761,33 +761,6 @@
             </objects>
             <point key="canvasLocation" x="8243" y="949"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="bj8-BH-3jj">
-            <objects>
-                <viewController id="Wor-4u-LTd" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="bdA-Tl-qaq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LYb-zf-KFS">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="oin-5o-Sn3"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="LYb-zf-KFS" firstAttribute="top" secondItem="oin-5o-Sn3" secondAttribute="top" id="Fz4-Bq-a55"/>
-                            <constraint firstItem="oin-5o-Sn3" firstAttribute="bottom" secondItem="LYb-zf-KFS" secondAttribute="bottom" id="SLG-jg-h1j"/>
-                            <constraint firstItem="LYb-zf-KFS" firstAttribute="leading" secondItem="oin-5o-Sn3" secondAttribute="leading" id="VAl-ly-vnq"/>
-                            <constraint firstItem="oin-5o-Sn3" firstAttribute="trailing" secondItem="LYb-zf-KFS" secondAttribute="trailing" id="vzi-Zy-cpf"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7Tf-7h-z5o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1658" y="949"/>
-        </scene>
         <!--Home View Controller-->
         <scene sceneID="Wf3-k1-rhp">
             <objects>

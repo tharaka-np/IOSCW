@@ -34,5 +34,14 @@ class CreateNotificationViewController: UIViewController {
             ]as [String:Any]
         
         Service.shared.addNewNotification(notificationArray)
+        
+        // create the alert
+        let alert = UIAlertController(title: "Success", message: "Notification successfully created.", preferredStyle: UIAlertController.Style.alert)
+
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
     }
 }

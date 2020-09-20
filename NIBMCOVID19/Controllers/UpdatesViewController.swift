@@ -86,6 +86,15 @@ class UpdatesViewController: UIViewController, CLLocationManagerDelegate {
                 ]as [String : Any]
         
         Service.shared.updateUserTemp(userTempInfo)
+        
+        // create the alert
+        let alert = UIAlertController(title: "Thank you", message: "Temparature updated successfully.", preferredStyle: UIAlertController.Style.alert)
+
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
     }
     
     

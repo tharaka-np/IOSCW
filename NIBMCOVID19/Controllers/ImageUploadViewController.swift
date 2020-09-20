@@ -114,6 +114,15 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
                     UserDefaults.standard.set(urlString, forKey: "url")
                     
                     Service.shared.updateUserProfileImage(urlString)
+                    
+                    // create the alert
+                    let alert = UIAlertController(title: "Success", message: "Profile image updated successfully.", preferredStyle: UIAlertController.Style.alert)
+
+                    // add an action (button)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+
+                    // show the alert
+                    self.present(alert, animated: true, completion: nil)
                 }
             })
         })
@@ -133,6 +142,15 @@ class ImageUploadViewController: UIViewController, UIImagePickerControllerDelega
         ] as [String : Any]
         
         Service.shared.updateUserDetails(values)
+        
+        // create the alert
+        let alert = UIAlertController(title: "Success", message: "Profile details updated successfully.", preferredStyle: UIAlertController.Style.alert)
+
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController){
