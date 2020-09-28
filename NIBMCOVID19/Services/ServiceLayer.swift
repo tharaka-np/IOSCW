@@ -217,25 +217,77 @@ struct Service {
         
     }
     
+//    func getLastNotification(completion: @escaping([notification]) -> Void) {
+//
+//        let recentPostsQuery = (REFF_NOTIFICATION.queryLimited(toLast: 1))
+//        recentPostsQuery.observe(DataEventType.value, with: { (snapshot) in
+//
+//            for dataSet in snapshot.children.allObjects as![DataSnapshot]{
+//                let singleData = dataSet.value as? [String:AnyObject]
+//
+//                let description = singleData?["description"]
+//                let title = singleData?["title"]
+//                let syncDateTime = singleData?["syncDateTime"]
+//                let uid = singleData?["uid"]
+//
+//                let notific = notification(title: title as! String?, description: description as! String?, syncDateTime:syncDateTime as! String? , uid:uid as! String?)
+//                allNotification.append(notific)
+//            }
+//
+//            completion(allNotification)
+//
+//        })
+//    }
+    
     func getLastNotification(completion: @escaping([notification]) -> Void) {
-            
-        let recentPostsQuery = (REFF_NOTIFICATION.queryLimited(toLast: 1))
-        recentPostsQuery.observe(DataEventType.value, with: { (snapshot) in
 
-            for dataSet in snapshot.children.allObjects as![DataSnapshot]{
-                let singleData = dataSet.value as? [String:AnyObject]
+            var allNotifications = [notification]()
+             REFF_NOTIFICATION.observe(.childAdded , with: {
+                 (snapshot) in
+                   
+                (REFF_NOTIFICATION.queryLimited(toLast: 1)).observeSingleEvent(of: .value, with: { snapshot in
+                     allNotifications.removeAll()
+                     
+                     if let directory = snapshot.value as? [String: Any] {
+                         for location in directory{
+                             guard let singleData = location.value as? [String: Any] else {
+                                 continue
+                             }
 
-                let description = singleData?["description"]
-                let title = singleData?["title"]
-                let syncDateTime = singleData?["syncDateTime"]
-                let uid = singleData?["uid"]
+                         let title = singleData["title"]
+                         let description = singleData["description"]
+                         let syncDateTime = singleData["syncDateTime"]
+                         let uid = singleData["uid"]
 
-                let notific = notification(title: title as! String?, description: description as! String?, syncDateTime:syncDateTime as! String? , uid:uid as! String?)
-                allNotification.append(notific)
-            }
+                        let singleNotification = notification(title: title as! String?, description: description as! String?, syncDateTime:syncDateTime as! String? , uid:uid as! String?)
+                        allNotifications.append(singleNotification)
+                     
+                         }
+                     completion(allNotifications)
+                     }
+                 })
+             })
+                 
+             (REFF_NOTIFICATION.queryLimited(toLast: 1)).observeSingleEvent(of: .value, with: { snapshot in
+                 if let directory = snapshot.value as? [String: Any] {
+                     for(_, val) in directory{
+                         guard let singleData = val as? [String: Any] else {
+                             continue
+                         }
+                        
+                        let title = singleData["title"]
+                        let description = singleData["description"]
+                        let syncDateTime = singleData["syncDateTime"]
+                        let uid = singleData["uid"]
 
-            completion(allNotification)
+                        let singleNotification = notification(title: title as! String?, description: description as! String?, syncDateTime:syncDateTime as! String? , uid:uid as! String?)
+                        
+                    allNotifications.append(singleNotification)
+                 
+                     }
+                 completion(allNotifications)
 
-        })
-    }
+                 }
+             })
+        }
 }

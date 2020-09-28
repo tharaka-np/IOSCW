@@ -1008,6 +1008,9 @@
                     <navigationItem key="navigationItem" id="uhy-kC-8PA"/>
                     <connections>
                         <outlet property="latestMsg" destination="iHL-yb-icK" id="hyK-oL-k2y"/>
+                        <outlet property="lblInfected" destination="2PM-cp-Zp1" id="EFc-Ca-IAl"/>
+                        <outlet property="lblNoInfect" destination="FmU-3s-UFP" id="T94-To-XOm"/>
+                        <outlet property="lblTotal" destination="gGu-j0-Rhk" id="qlZ-ku-g9M"/>
                         <outlet property="mapView" destination="Wye-j8-uVA" id="iJq-3c-npT"/>
                     </connections>
                 </viewController>

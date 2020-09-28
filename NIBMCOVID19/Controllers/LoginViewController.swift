@@ -33,15 +33,18 @@ class LoginViewController: UIViewController {
         Auth.auth().signIn(withEmail: mail, password: pwd) { (result, error) in
             if let error = error {
                 print("Faild to login user with error \(error)")
+                // create the alert
+                let alert = UIAlertController(title: "Error", message: "Invalid login details. Please try again.", preferredStyle: UIAlertController.Style.alert)
+                
+                // add an action (button)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                
+                self.present(alert, animated: true, completion: nil)
                 return
             }
             
             print("Login success");
             self.performSegue(withIdentifier: "gotohomeseg", sender: nil)
-//            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//            let newViewController = storyBoard.instantiateViewController(withIdentifier: "homeVC") as! HomeViewController
-//                    self.present(newViewController, animated: true, completion: nil)
-            //self.dismiss(animated: true, completion: nil)
         }
     }
     

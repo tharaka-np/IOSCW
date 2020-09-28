@@ -25,6 +25,11 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var latestMsg: UILabel!
     
+    
+    @IBOutlet weak var lblInfected: UILabel!
+    @IBOutlet weak var lblNoInfect: UILabel!
+    @IBOutlet weak var lblTotal: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Home"
@@ -63,7 +68,7 @@ class HomeViewController: UIViewController {
     
     func getLastNotification(){
         Service.shared.getLastNotification{ (notification) in
-            self.lastNotification = allNotification
+            self.lastNotification = notification
         }
     }
     
@@ -78,6 +83,9 @@ class HomeViewController: UIViewController {
     }
     
     func updateMapData(){
+        var infected = 0
+        var non_infected = 0
+        var totalUsers = 0
         for data in mapLocations{
             
             if data.uid == Auth.auth().currentUser?.uid ?? "" {
@@ -89,14 +97,22 @@ class HomeViewController: UIViewController {
             let pin = MapMarker(coordinate: coordinate)
             if data.temp < 36 {
                 pin.title = "SAFE"
+                infected = infected + 1
                 
             } else {
                 pin.title = "RISK"
+                non_infected = non_infected + 1
                 
             }
             
             self.mapView.addAnnotation(pin)
+            
+            totalUsers = totalUsers + 1
         }
+        
+        self.lblInfected.text = String(infected)
+        self.lblNoInfect.text = String(non_infected)
+        self.lblTotal.text = String(totalUsers)
     }
     
     func fetchDataMapLocations() {
@@ -154,15 +170,15 @@ extension HomeViewController :  MKMapViewDelegate{
         let annotionView = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
         
         if annotation.title == "RISK" {
-            annotionView.image = #imageLiteral(resourceName: "icons8-street-view-16")
+            annotionView.image = #imageLiteral(resourceName: "icons8-street-view-100")
         }
         
         if annotation.title == "SAFE" {
-            annotionView.image = #imageLiteral(resourceName: "icons8-street-view-96")
+            annotionView.image = #imageLiteral(resourceName: "location(2)")
         }
         
         if annotation.title == "I AM" {
-            annotionView.image = #imageLiteral(resourceName: "icons8-marker-96")
+            annotionView.image = #imageLiteral(resourceName: "location")
         }
         
         annotionView.canShowCallout = true

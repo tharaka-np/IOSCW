@@ -132,15 +132,15 @@ extension SingleMapViewController :  MKMapViewDelegate{
         let annotionView = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
         
         if annotation.title == "RISK" {
-            annotionView.image = #imageLiteral(resourceName: "icons8-street-view-16")
+            annotionView.image = #imageLiteral(resourceName: "icons8-street-view-100")
         }
         
         if annotation.title == "SAFE" {
-            annotionView.image = #imageLiteral(resourceName: "icons8-street-view-96")
+            annotionView.image = #imageLiteral(resourceName: "location(2)")
         }
         
         if annotation.title == "I AM" {
-            annotionView.image = #imageLiteral(resourceName: "icons8-marker-96")
+            annotionView.image = #imageLiteral(resourceName: "location")
         }
         
         annotionView.canShowCallout = true
